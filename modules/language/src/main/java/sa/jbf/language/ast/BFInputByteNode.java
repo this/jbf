@@ -22,6 +22,7 @@ import sa.jbf.language.BFLanguage;
 import sa.jbf.language.meta.SourcePointer;
 import sa.jbf.language.runtime.BFIOException;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 @NodeInfo(language = BFLanguage.ID, shortName = ",", description = "Input byte command")
@@ -39,7 +40,7 @@ public class BFInputByteNode extends BFNode {
     private byte doRead(final InputStream in) {
         try {
             return (byte) in.read();
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new BFIOException(this, "Cannot read next byte from standard input", e);
         }
     }

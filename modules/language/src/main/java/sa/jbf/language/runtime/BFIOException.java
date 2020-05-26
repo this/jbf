@@ -30,8 +30,10 @@ package sa.jbf.language.runtime;
 
 import sa.jbf.language.ast.BFNode;
 
+import java.io.IOException;
+
 public class BFIOException extends BFRuntimeException {
-    public BFIOException(BFNode location, String message, Throwable cause) {
+    public BFIOException(BFNode location, String message, IOException cause) {
         super(location, message, cause);
     }
 }
