@@ -20,4 +20,4 @@ jobs:
         with:
           maven-version: 3.5.4
       - name: 'mvn clean test'
-        run: mvn clean test
+        run: mvn --batch-mode clean test
