@@ -15,4 +15,8 @@ jobs:
         uses: DeLaGuardo/setup-graalvm@3
         with:
           graalvm-version: '20.0.0.java11'
+      - name: 'Set up Maven'
+        uses: stCarolas/setup-maven@v3
+        with:
+          maven-version: 3.5.4
 
