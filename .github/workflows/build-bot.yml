@@ -1,0 +1,25 @@
+name: 'Build Bot'
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  build:
+    name: 'CI Pipeline'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Setup GraalVM'
+        uses: DeLaGuardo/setup-graalvm@3
+        with:
+          graalvm-version: '20.0.0.java11'
+      - name: 'Set up Maven'
+        uses: stCarolas/setup-maven@v3
+        with:
+          maven-version: 3.5.4
+      - name: 'mvn clean test'
+        run: mvn --batch-mode clean test
