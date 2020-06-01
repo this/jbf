@@ -30,8 +30,20 @@ package sa.jbf.language.runtime;
 
 import sa.jbf.language.ast.BFNode;
 
+import java.io.IOException;
+
+/**
+ * Thrown to indicate an IO exception occurred in {@link sa.jbf.language.BFLanguage BF language}.
+ */
 public class BFIOException extends BFRuntimeException {
-    public BFIOException(BFNode location, String message, Throwable cause) {
+    /**
+     * Constructs a new exception with the specified location, detail message, and cause.
+     *
+     * @param location node indicating the location where the exception occurred in the AST
+     * @param message  the detail message
+     * @param cause    underline Java IOException
+     */
+    public BFIOException(BFNode location, String message, IOException cause) {
         super(location, message, cause);
     }
 }

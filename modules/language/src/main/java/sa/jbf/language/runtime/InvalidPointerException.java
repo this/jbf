@@ -30,7 +30,16 @@ package sa.jbf.language.runtime;
 
 import sa.jbf.language.ast.BFNode;
 
+/**
+ * Thrown to indicate an invalid data pointer resulted by a data pointer operation in {@link sa.jbf.language.BFLanguage BF language}.
+ */
 public class InvalidPointerException extends BFRuntimeException {
+    /**
+     * Constructs a new exception with the specified location, detail message, and cause.
+     *
+     * @param location node indicating the location where the exception occurred in the AST
+     * @param message  the detail message
+     */
     public InvalidPointerException(BFNode location, String message) {
         super(location, message);
     }
