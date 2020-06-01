@@ -11,4 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: 'Setup GraalVM'
+        uses: DeLaGuardo/setup-graalvm@3
+        with:
+          graalvm-version: '20.0.0.java11'
 
