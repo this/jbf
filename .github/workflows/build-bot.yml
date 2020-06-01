@@ -19,4 +19,5 @@ jobs:
         uses: stCarolas/setup-maven@v3
         with:
           maven-version: 3.5.4
-
+      - name: 'mvn clean test'
+        run: mvn clean test
