@@ -20,7 +20,7 @@ import com.oracle.truffle.api.source.Source;
 import com.oracle.truffle.api.source.SourceSection;
 
 /**
- * Represents an exception occurred during source code parsing.
+ * Thrown to indicate an anomaly detected during parsing a source of {@link sa.jbf.language.BFLanguage BF language}.
  */
 public class ParserException extends RuntimeException implements TruffleException {
     private final BFToken token;
@@ -39,26 +39,51 @@ public class ParserException extends RuntimeException implements TruffleExceptio
         this.source = source;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return always {@code null}
+     */
     @Override
     public Node getLocation() {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return always {@code true}
+     */
     @Override
     public boolean isSyntaxError() {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return always {@code true}
+     */
     @Override
     public boolean isCancelled() {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return always {@code true}
+     */
     @Override
     public boolean isExit() {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return always {@code 1}
+     */
     @Override
     public int getExitStatus() {
         return 1;
