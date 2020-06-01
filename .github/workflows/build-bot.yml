@@ -11,13 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: 'Setup GraalVM'
-        uses: DeLaGuardo/setup-graalvm@3
-        with:
-          graalvm-version: '20.0.0.java11'
-      - name: 'Set up Maven'
-        uses: stCarolas/setup-maven@v3
-        with:
-          maven-version: 3.5.4
-      - name: 'mvn clean package'
-        run: mvn clean package
+
