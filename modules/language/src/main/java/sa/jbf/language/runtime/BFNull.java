@@ -16,6 +16,9 @@ package sa.jbf.language.runtime;
 
 import com.oracle.truffle.api.interop.TruffleObject;
 
+/**
+ * Represents the nil value in {@link sa.jbf.language.BFLanguage BF language}.
+ */
 public class BFNull implements TruffleObject {
     public static final BFNull INSTANCE = new BFNull();
 
