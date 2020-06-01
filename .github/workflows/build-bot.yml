@@ -3,6 +3,9 @@ name: 'Build Bot'
 on:
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
+  push:
+    branches:
+      - 'master'
 
 jobs:
   build:
