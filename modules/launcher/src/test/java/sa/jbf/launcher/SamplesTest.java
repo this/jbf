@@ -27,6 +27,7 @@ import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class SamplesTest {
     private final static InputStream originalStandardIn = System.in;
@@ -53,6 +54,7 @@ class SamplesTest {
         final var mockRuntime = mock(Runtime.class);
         final var testFilePath = String.format("src/test/resources/samples/%s.bf", testName);
         new BFLauncher(mockRuntime).doLaunch(new String[]{testFilePath});
+        verify(mockRuntime).exit(0);
         final var actualOutput = standardOut.toString();
         final var expectedOutput = getExpectedOut(testName);
         assertEquals(expectedOutput, actualOutput);
