@@ -70,16 +70,16 @@ public class SamplesTest {
     }
 
     static File getSource(final String testName) {
-        return Path.of(String.format("src/test/resources/%s.bf", testName)).toFile();
+        return Path.of(String.format("src/test/resources/samples/%s.bf", testName)).toFile();
     }
 
     static InputStream getStandardIn(final String testName) throws IOException {
-        final var inputFile = Path.of(String.format("src/test/resources/%s.in", testName));
+        final var inputFile = Path.of(String.format("src/test/resources/samples/%s.in", testName));
         return Files.exists(inputFile) ? Files.newInputStream(inputFile) : InputStream.nullInputStream();
     }
 
     static String getExpectedOut(final String testName) throws IOException {
-        final var outputFile = Path.of(String.format("src/test/resources/%s.out", testName));
+        final var outputFile = Path.of(String.format("src/test/resources/samples/%s.out", testName));
         return Files.exists(outputFile) ? Files.readString(outputFile) : "";
     }
 }
