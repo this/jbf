@@ -51,13 +51,10 @@ class SamplesTest {
         System.setOut(new PrintStream(standardOut));
         System.setErr(new PrintStream(standardErr));
 
-        final var mockRuntime = mock(Runtime.class);
-        final var testFilePath = String.format("src/test/resources/samples/%s.bf", testName);
-        new BFLauncher(mockRuntime).doLaunch(new String[]{testFilePath});
-        verify(mockRuntime).exit(0);
-        final var actualOutput = standardOut.toString();
-        final var expectedOutput = getExpectedOut(testName);
-        assertEquals(expectedOutput, actualOutput);
+        final var runtime = mock(Runtime.class);
+        new BFLauncher(runtime).doLaunch(new String[]{String.format("src/test/resources/samples/%s.bf", testName)});
+        verify(runtime).exit(0);
+        assertEquals(getExpectedOut(testName), standardOut.toString());
         assertEquals(getExpectedErr(testName), standardErr.toString());
     }
 
