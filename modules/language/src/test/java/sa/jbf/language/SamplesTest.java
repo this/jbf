@@ -31,7 +31,6 @@ package sa.jbf.language;
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Engine;
 import org.graalvm.polyglot.Source;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -41,6 +40,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SamplesTest {
     @ParameterizedTest
@@ -65,7 +66,7 @@ public class SamplesTest {
 
         final var actualOutput = standardOut.toString();
         final var expectedOutput = getExpectedOut(testName);
-        Assertions.assertEquals(expectedOutput, actualOutput);
+        assertEquals(expectedOutput, actualOutput);
     }
 
     static File getSource(final String testName) {
