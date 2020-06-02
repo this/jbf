@@ -51,6 +51,11 @@
                 <version>${graalvm.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.graalvm.sdk</groupId>
+                <artifactId>launcher-common</artifactId>
+                <version>${graalvm.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.graalvm.truffle</groupId>
                 <artifactId>truffle-dsl-processor</artifactId>
                 <version>${graalvm.version}</version>
@@ -61,11 +66,6 @@
                 <artifactId>graal-sdk</artifactId>
                 <version>${graalvm.version}</version>
                 <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.graalvm.sdk</groupId>
-                <artifactId>launcher-common</artifactId>
-                <version>${graalvm.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
