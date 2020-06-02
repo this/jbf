@@ -31,7 +31,7 @@ import java.util.Map;
  */
 public class BFLauncher extends AbstractLanguageLauncher {
     private static final int EXIT_NO_SOURCE = -1;
-    private final Runtime currentRuntime;
+    private final Runtime runtime;
     private Path sourceFile = null;
 
     public static void main(String[] args) {
@@ -48,10 +48,10 @@ public class BFLauncher extends AbstractLanguageLauncher {
     /**
      * Creates a new launcher that uses the specified runtime to interact with the application environment.
      *
-     * @param currentRuntime launcher runtime
+     * @param runtime launcher runtime
      */
-    BFLauncher(Runtime currentRuntime) {
-        this.currentRuntime = currentRuntime;
+    BFLauncher(Runtime runtime) {
+        this.runtime = runtime;
     }
 
     /**
@@ -78,7 +78,7 @@ public class BFLauncher extends AbstractLanguageLauncher {
 
     @Override
     protected void launch(final Context.Builder contextBuilder) {
-        currentRuntime.exit(executeSource(contextBuilder.build()));
+        runtime.exit(executeSource(contextBuilder.build()));
     }
 
     @Override
