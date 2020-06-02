@@ -30,12 +30,24 @@ import java.util.Map;
  * Launcher for {@link BFLanguage BF language}.
  */
 public class BFLauncher extends AbstractLanguageLauncher {
-    protected static final int EXIT_NO_SOURCE = -1;
-
+    private static final int EXIT_NO_SOURCE = -1;
+    private final Runtime currentRuntime;
     private Path sourceFile = null;
 
     public static void main(String[] args) {
-        new BFLauncher().launch(args);
+        new BFLauncher().doLaunch(args);
+    }
+
+    public BFLauncher() {
+        this(Runtime.getRuntime());
+    }
+
+    BFLauncher(Runtime currentRuntime) {
+        this.currentRuntime = currentRuntime;
+    }
+
+    void doLaunch(String[] args) {
+        super.launch(args);
     }
 
     @Override
@@ -53,7 +65,7 @@ public class BFLauncher extends AbstractLanguageLauncher {
 
     @Override
     protected void launch(final Context.Builder contextBuilder) {
-        System.exit(executeSource(contextBuilder.build()));
+        currentRuntime.exit(executeSource(contextBuilder.build()));
     }
 
     @Override

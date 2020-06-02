@@ -25,8 +25,8 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static com.github.stefanbirkner.systemlambda.SystemLambda.catchSystemExit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 class SamplesTest {
     private final static InputStream originalStandardIn = System.in;
@@ -50,11 +50,13 @@ class SamplesTest {
         System.setOut(new PrintStream(standardOut));
         System.setErr(new PrintStream(standardErr));
 
+        final var mockRuntime = mock(Runtime.class);
         final var testFilePath = String.format("src/test/resources/samples/%s.bf", testName);
-        catchSystemExit(() -> BFLauncher.main(new String[]{testFilePath}));
+        new BFLauncher(mockRuntime).doLaunch(new String[]{testFilePath});
         final var actualOutput = standardOut.toString();
         final var expectedOutput = getExpectedOut(testName);
         assertEquals(expectedOutput, actualOutput);
+        assertEquals(getExpectedErr(testName), standardErr.toString());
     }
 
     static InputStream getStandardIn(final String testName) throws IOException {
@@ -64,6 +66,11 @@ class SamplesTest {
 
     static String getExpectedOut(final String testName) throws IOException {
         final var outputFile = Path.of(String.format("src/test/resources/samples/%s.out", testName));
+        return Files.exists(outputFile) ? Files.readString(outputFile) : "";
+    }
+
+    static String getExpectedErr(final String testName) throws IOException {
+        final var outputFile = Path.of(String.format("src/test/resources/samples/%s.err", testName));
         return Files.exists(outputFile) ? Files.readString(outputFile) : "";
     }
 }
