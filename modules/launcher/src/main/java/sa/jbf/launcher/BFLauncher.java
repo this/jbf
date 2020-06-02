@@ -30,12 +30,37 @@ import java.util.Map;
  * Launcher for {@link BFLanguage BF language}.
  */
 public class BFLauncher extends AbstractLanguageLauncher {
-    protected static final int EXIT_NO_SOURCE = -1;
-
+    private static final int EXIT_NO_SOURCE = -1;
+    private final Runtime runtime;
     private Path sourceFile = null;
 
     public static void main(String[] args) {
-        new BFLauncher().launch(args);
+        new BFLauncher().doLaunch(args);
+    }
+
+    /**
+     * Creates a new launcher that uses the {@link Runtime#getRuntime()} to interact with the application environment.
+     */
+    public BFLauncher() {
+        this(Runtime.getRuntime());
+    }
+
+    /**
+     * Creates a new launcher that uses the specified runtime to interact with the application environment.
+     *
+     * @param runtime launcher runtime
+     */
+    BFLauncher(Runtime runtime) {
+        this.runtime = runtime;
+    }
+
+    /**
+     * Wraps {@link AbstractLanguageLauncher#launch(String[])}, hence should be called from the {@link #main(String[])} method.
+     *
+     * @param args the command line arguments.
+     */
+    void doLaunch(String[] args) {
+        super.launch(args);
     }
 
     @Override
@@ -53,7 +78,7 @@ public class BFLauncher extends AbstractLanguageLauncher {
 
     @Override
     protected void launch(final Context.Builder contextBuilder) {
-        System.exit(executeSource(contextBuilder.build()));
+        runtime.exit(executeSource(contextBuilder.build()));
     }
 
     @Override
