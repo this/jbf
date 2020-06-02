@@ -38,14 +38,27 @@ public class BFLauncher extends AbstractLanguageLauncher {
         new BFLauncher().doLaunch(args);
     }
 
+    /**
+     * Creates a new launcher that uses the {@link Runtime#getRuntime()} to interact with the application environment.
+     */
     public BFLauncher() {
         this(Runtime.getRuntime());
     }
 
+    /**
+     * Creates a new launcher that uses the specified runtime to interact with the application environment.
+     *
+     * @param currentRuntime launcher runtime
+     */
     BFLauncher(Runtime currentRuntime) {
         this.currentRuntime = currentRuntime;
     }
 
+    /**
+     * Wraps {@link AbstractLanguageLauncher#launch(String[])}, hence should be called from the {@link #main(String[])} method.
+     *
+     * @param args the command line arguments.
+     */
     void doLaunch(String[] args) {
         super.launch(args);
     }
