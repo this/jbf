@@ -19,6 +19,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import sa.jbf.language.BFLanguage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class BFParserTest {
     @Test
     void noMatchingJumpForwardTest() {
@@ -26,12 +29,12 @@ public class BFParserTest {
         final var source = Source.newBuilder(BFLanguage.ID, sourceCode, null).build();
         final var parser = new BFParser(new BFLanguage(), source);
         final var parserException = Assertions.assertThrows(ParserException.class, parser::parse);
-        Assertions.assertEquals("No matching [", parserException.getMessage());
-        Assertions.assertTrue(parserException.isSyntaxError());
-        Assertions.assertTrue(parserException.isCancelled());
-        Assertions.assertTrue(parserException.isExit());
-        Assertions.assertEquals(2, parserException.getSourceLocation().getCharIndex());
-        Assertions.assertEquals(1, parserException.getSourceLocation().getCharLength());
+        assertEquals("No matching [", parserException.getMessage());
+        assertTrue(parserException.isSyntaxError());
+        assertTrue(parserException.isCancelled());
+        assertTrue(parserException.isExit());
+        assertEquals(2, parserException.getSourceLocation().getCharIndex());
+        assertEquals(1, parserException.getSourceLocation().getCharLength());
     }
 
     @Test
@@ -40,11 +43,11 @@ public class BFParserTest {
         final var source = Source.newBuilder(BFLanguage.ID, sourceCode, null).build();
         final var parser = new BFParser(new BFLanguage(), source);
         final var parserException = Assertions.assertThrows(ParserException.class, parser::parse);
-        Assertions.assertEquals("No matching ]", parserException.getMessage());
-        Assertions.assertTrue(parserException.isSyntaxError());
-        Assertions.assertTrue(parserException.isCancelled());
-        Assertions.assertTrue(parserException.isExit());
-        Assertions.assertEquals(0, parserException.getSourceLocation().getCharIndex());
-        Assertions.assertEquals(1, parserException.getSourceLocation().getCharLength());
+        assertEquals("No matching ]", parserException.getMessage());
+        assertTrue(parserException.isSyntaxError());
+        assertTrue(parserException.isCancelled());
+        assertTrue(parserException.isExit());
+        assertEquals(0, parserException.getSourceLocation().getCharIndex());
+        assertEquals(1, parserException.getSourceLocation().getCharLength());
     }
 }
