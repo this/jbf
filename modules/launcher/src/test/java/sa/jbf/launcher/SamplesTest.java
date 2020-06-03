@@ -14,7 +14,7 @@
 
 package sa.jbf.launcher;
 
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -30,12 +30,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 class SamplesTest {
-    private final static InputStream originalStandardIn = System.in;
-    private final static PrintStream originalStandardOut = System.out;
-    private final static PrintStream originalStandardErr = System.err;
+    private final InputStream originalStandardIn = System.in;
+    private final PrintStream originalStandardOut = System.out;
+    private final PrintStream originalStandardErr = System.err;
 
-    @AfterAll
-    static void setupStreams() {
+    @AfterEach
+    void setupStreams() {
         System.setIn(originalStandardIn);
         System.setOut(originalStandardOut);
         System.setErr(originalStandardErr);
@@ -55,7 +55,24 @@ class SamplesTest {
         new BFLauncher(runtime).doLaunch(new String[]{String.format("src/test/resources/samples/%s.bf", testName)});
         verify(runtime).exit(0);
         assertEquals(getExpectedOut(testName), standardOut.toString());
+        assertEquals("", standardErr.toString());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"invalid-pointer-error", "no-matching-forward-jump-error", "no-matching-backward-jump-error"})
+    void executeErrorSample(String testName) throws Exception {
+        final var standardIn = getStandardIn(testName);
+        final var standardOut = new ByteArrayOutputStream();
+        final var standardErr = new ByteArrayOutputStream();
+        System.setIn(standardIn);
+        System.setOut(new PrintStream(standardOut));
+        System.setErr(new PrintStream(standardErr));
+
+        final var runtime = mock(Runtime.class);
+        new BFLauncher(runtime).doLaunch(new String[]{String.format("src/test/resources/samples/%s.bf", testName)});
+        verify(runtime).exit(1);
         assertEquals(getExpectedErr(testName), standardErr.toString());
+        assertEquals("", standardOut.toString());
     }
 
     static InputStream getStandardIn(final String testName) throws IOException {
