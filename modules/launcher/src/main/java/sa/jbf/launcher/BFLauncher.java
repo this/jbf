@@ -17,6 +17,7 @@ package sa.jbf.launcher;
 import org.graalvm.launcher.AbstractLanguageLauncher;
 import org.graalvm.options.OptionCategory;
 import org.graalvm.polyglot.Context;
+import org.graalvm.polyglot.PolyglotException;
 import org.graalvm.polyglot.Source;
 import sa.jbf.language.BFLanguage;
 
@@ -25,6 +26,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+
+import static java.lang.String.format;
 
 /**
  * Launcher for {@link BFLanguage BF language}.
@@ -95,8 +98,24 @@ public class BFLauncher extends AbstractLanguageLauncher {
             final var source = Source.newBuilder(BFLanguage.ID, sourceFile.toFile()).build();
             context.eval(source);
             return 0;
+        } catch (PolyglotException e) {
+            prettyPrint(e);
+            return e.getExitStatus();
         } catch (IOException e) {
             throw abort(e, EXIT_NO_SOURCE);
         }
+    }
+
+    private static void prettyPrint(PolyglotException e) {
+        final var sourceSection = e.getSourceLocation();
+        final var source = sourceSection.getSource();
+
+        System.err.println(format("[ERROR] %s:[%d,%d] %s",
+                source.getName(),
+                sourceSection.getStartLine(),
+                sourceSection.getStartColumn(),
+                e.getMessage()));
+        System.err.println(format("        %s", source.getCharacters(sourceSection.getStartLine()).toString()));
+        System.err.println(format("        %s^", " ".repeat(sourceSection.getStartColumn() - 1)));
     }
 }

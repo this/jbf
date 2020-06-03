@@ -1,0 +1,3 @@
+[ERROR] invalid-pointer-error.bf:[6,25] Pointer cannot be less than zero
+        Try go past cell #0     <
+                                ^
