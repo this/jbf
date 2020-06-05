@@ -105,6 +105,11 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.graalvm.nativeimage</groupId>
+                    <artifactId>native-image-maven-plugin</artifactId>
+                    <version>${graalvm.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -123,6 +128,10 @@
                 <configuration>
                     <argLine>-Dgraalvm.locatorDisabled=true</argLine>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.graalvm.nativeimage</groupId>
+                <artifactId>native-image-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

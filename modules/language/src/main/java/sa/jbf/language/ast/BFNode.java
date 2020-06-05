@@ -49,6 +49,14 @@ public abstract class BFNode extends Node {
                 .createSection(sourcePointer.getStartIndex(), sourcePointer.getLength());
     }
 
+    FrameSlot getPointerSlot() {
+        return pointerSlot;
+    }
+
+    FrameSlot[] getDataSlots() {
+        return dataSlots;
+    }
+
     protected int getPointer(final VirtualFrame frame) {
         return FrameUtil.getIntSafe(frame, pointerSlot);
     }

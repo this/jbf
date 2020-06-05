@@ -15,7 +15,6 @@
 package sa.jbf.language.ast;
 
 import com.oracle.truffle.api.frame.FrameDescriptor;
-import com.oracle.truffle.api.frame.FrameSlotKind;
 import com.oracle.truffle.api.frame.VirtualFrame;
 import com.oracle.truffle.api.nodes.ExplodeLoop;
 import com.oracle.truffle.api.nodes.NodeInfo;
@@ -52,14 +51,11 @@ public class BFRootNode extends RootNode {
 
     @ExplodeLoop
     private void initializeMemorySlots(final VirtualFrame frame) {
-        final var descriptor = frame.getFrameDescriptor();
-        for (var slot : descriptor.getSlots()) {
-            var frameSlotKind = descriptor.getFrameSlotKind(slot);
-            if (frameSlotKind == FrameSlotKind.Byte) {
-                frame.setByte(slot, (byte) 0);
-            } else if (frameSlotKind == FrameSlotKind.Int) {
-                frame.setInt(slot, 0);
-            }
+        // Since all children shares the same slots, we only need to initialize slots of a one child.
+        final var childNode = children[0];
+        frame.setInt(childNode.getPointerSlot(), 0);
+        for (var dataSlots : childNode.getDataSlots()) {
+            frame.setByte(dataSlots, (byte) 0);
         }
     }
 
