@@ -1,4 +1,4 @@
-# jbf - Brainf\*ck on JVM
+# jBF - Brainf\*ck on JVM
 A Brainf\*ck implementation on top of the JVM, utilizing GraalVM and Truffel framework.
 
 ![Build Bot](https://github.com/this/jbf/workflows/Build%20Bot/badge.svg?branch=master&event=push)

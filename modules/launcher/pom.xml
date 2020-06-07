@@ -93,11 +93,6 @@
                                 <phase>package</phase>
                             </execution>
                         </executions>
-                        <configuration>
-                            <imageName>bf</imageName>
-                            <mainClass>${mainClass}</mainClass>
-                            <buildArgs>--macro:truffle --no-fallback --initialize-at-build-time</buildArgs>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
