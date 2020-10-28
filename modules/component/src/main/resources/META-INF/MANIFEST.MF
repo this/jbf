@@ -1,0 +1,5 @@
+Bundle-Name: Brainfuck
+Bundle-Symbolic-Name: ${project.groupId}
+Bundle-Version: ${project.version}
+Bundle-RequireCapability: org.graalvm; filter:="(&(graalvm_version=${graalvm.version})(os_arch=amd64))"
+X-GraalVM-Polyglot-Part: True

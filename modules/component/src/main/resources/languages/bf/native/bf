@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+java \
+  -Dtruffle.class.path.append="../bf-language.jar" \
+  -jar "../launcher/bf-launcher.jar" \
+  "$1"
